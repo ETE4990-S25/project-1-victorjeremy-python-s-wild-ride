@@ -14,7 +14,4 @@ class Entity:
         inventory = {}
         team = int(input("set team number"))
         hitpoints = int(input("set hitpoints"))
-        return entity(name, description, inventory, team, hitpoints)
-
-    def addItem (item):
-        """empty"""
+        return Entity(name, description, inventory, team, hitpoints)
