@@ -2,7 +2,7 @@ repository for Victor Flores and Jeremy Esperanza
 ETE 4990
 
 
-objectives
+goals
     - Player type selection
         -
     - Inventory Management
