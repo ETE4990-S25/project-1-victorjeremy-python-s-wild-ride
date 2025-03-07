@@ -1,0 +1,27 @@
+{
+  "magic": [
+    "wizard",
+    "mage",
+    "witch"
+  ],
+  "brawler": [
+    "barbarian",
+    "giant",
+    "gladiator"
+  ],
+  "swordsman": [
+    "samurai",
+    "crusader",
+    "buster"
+  ],
+  "stealth": [
+    "druid",
+    "ninja",
+    "rogue"
+  ],
+  "healer": [
+    "cleric",
+    "sage",
+    "shaman"
+  ]
+}
