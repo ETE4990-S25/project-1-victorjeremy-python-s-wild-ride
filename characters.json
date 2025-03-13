@@ -1,27 +1,27 @@
 {
   "magic": [
-    "wizard",
-    "mage",
-    "witch"
+    {"wizard": ["wizard", "tbd", 5, 1, 120]},
+    {"sorcerer": ["sorcerer", "tbd", 5, 1, 120]},
+    {"necromancer": ["necromancer", "tbd", 5, 1, 120]}
   ],
   "brawler": [
-    "barbarian",
-    "giant",
-    "gladiator"
+    {"barbarian": ["barbarian", "tbd", 5, 1, 120]},
+    {"giant": ["giant", "tbd", 5, 1, 120]},
+    {"gladiator": ["gladiator", "tbd", 5, 1, 120]}
   ],
   "swordsman": [
-    "samurai",
-    "crusader",
-    "buster"
+    {"samurai": ["samurai", "tbd", 5, 1, 120]},
+    {"crusader": ["crusader", "tbd", 5, 1, 120]},
+    {"buster": ["buster", "tbd", 5, 1, 120]}
   ],
   "stealth": [
-    "druid",
-    "ninja",
-    "rogue"
+    {"druid": ["druid", "tbd", 5, 1, 120]},
+    {"ninja": ["ninja", "tbd", 5, 1, 120]},
+    {"rogue": ["rogue", "tbd", 5, 1, 120]}
   ],
   "healer": [
-    "cleric",
-    "sage",
-    "shaman"
+    {"cleric": ["cleric", "tbd", 5, 1, 120]},
+    {"sage": ["sage", "tbd", 5, 1, 120]},
+    {"shaman": ["shaman", "tbd", 5, 1, 120]}
   ]
 }
