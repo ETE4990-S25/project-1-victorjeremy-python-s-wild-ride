@@ -7,6 +7,7 @@ class Entity:
         self.team = team
         self.hitpoints = hitpoints
 
+    @staticmethod
     def Create():
         """create an entity with user input"""
         name = input("add name")
