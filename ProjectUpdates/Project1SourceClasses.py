@@ -159,7 +159,31 @@ class Weapon(Item, Entity):
 #start of menu class
 class Menu:
     def __init__(self):
-
-    def playerSelect(self, )
+        """empty"""
+    def playerSelect():
+        """player selects class to play as"""
+        choice = input("select a class\n")
+        player = 0
+        index = 0
+        for i in characterdict:
+            # print(i)
+            for j in characterdict[i]:
+                # print(j)
+                # print(index)
+                for k in characterdict[i][index]:
+                    # print(characterdict[i][index][k][0])
+                    if choice == str(characterdict[i][index][k][0]):
+                        player = choice
+                index += 1
+            index = 0
+                
+                
+            
+        # print(player)    
+        if player != 0:
+            return player
+        else:
+            print("class does not exist")
+            
 
         
