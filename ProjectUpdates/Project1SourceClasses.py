@@ -119,6 +119,7 @@ class Item:
 
 class Weapon(Item, Entity):
     # inherits from classes Item and Entity
+    # entity is only used for damage in the attack method
     def __init__(self, name, desc, uses, damage):
         """child of item, introduces damage"""
         super().__init__(name, desc, uses)
@@ -154,4 +155,11 @@ class Weapon(Item, Entity):
             print("impossible")
             
 #end of Weapon subclass
+
+#start of menu class
+class Menu:
+    def __init__(self):
+
+    def playerSelect(self, )
+
         
