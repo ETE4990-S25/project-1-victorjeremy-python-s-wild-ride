@@ -165,6 +165,21 @@ class Menu:
         choice = input("select a class\n")
         player = 0
         index = 0
+        #to display the options to the player
+        if choice == "help":
+            print("here is what you can choose from\n")
+            #this loop only applies to dictionaries with the order: dict/list/dict
+            for i in inputdict:
+                print(i)
+                for j in inputdict[i]:
+                    # print(j)
+                    # print(index)
+                    for k in inputdict[i][index]:
+                        print(inputdict[i][index][k][0])
+                    index += 1
+                index = 0
+            Menu.playerselect(inputdict)
+            return 0
         #this loop only applies to dictionaries with the order: dict/list/dict
         for i in inputdict:
             # print(i)
@@ -194,8 +209,22 @@ class Menu:
 
     def gamestart():
         """initiates game"""
+        #local choice
+        choice = 0
+        #resets globals
         global enemylist
         enemylist = []
+        global playercharacter
+        playercharacter = 0
+        
+        print("welcome\n would you like to mindlessly press 1")
+        choice = int(input())
+        if choice == 1:
+            print("let us begin")
+        else:
+            print("guess not")
+
+
             
 
         
