@@ -160,30 +160,42 @@ class Weapon(Item, Entity):
 class Menu:
     def __init__(self):
         """empty"""
-    def playerSelect():
+    def playerSelect(inputdict):
         """player selects class to play as"""
         choice = input("select a class\n")
         player = 0
         index = 0
-        for i in characterdict:
+        #this loop only applies to dictionaries with the order: dict/list/dict
+        for i in inputdict:
             # print(i)
-            for j in characterdict[i]:
+            for j in inputdict[i]:
                 # print(j)
                 # print(index)
-                for k in characterdict[i][index]:
-                    # print(characterdict[i][index][k][0])
-                    if choice == str(characterdict[i][index][k][0]):
+                for k in inputdict[i][index]:
+                    # print(inputdict[i][index][k][0])
+                    if choice == str(inputdict[i][index][k][0]):
                         player = choice
                 index += 1
             index = 0
                 
-                
-            
         # print(player)    
         if player != 0:
             return player
         else:
             print("class does not exist")
+
+    def playercreate(inputdict):
+        """user creates a character"""
+        #open json file function, writable
+        #temp = playerselect()
+        global playercharacter
+        playercharacter = Menu.playerselect(inputdict)
+        #write temp to player data json
+
+    def gamestart():
+        """initiates game"""
+        global enemylist
+        enemylist = []
             
 
         
