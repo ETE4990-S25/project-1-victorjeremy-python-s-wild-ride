@@ -16,8 +16,8 @@ class Entity:
 
     
     def checklivingstate(self):
-        #boolean return meant to be used in other functions
-        #this function is for preventing someone from doing something if they are dead
+        #boolean return meant to be used in other methods
+        #this method is for preventing someone from doing something if they are dead
         """checks if the entity is alive"""
         return self.livingstate
 
@@ -32,7 +32,7 @@ class Entity:
             
     def checkteam(self, target):
         #takes the team integer from the entity and compares it
-        #this function is for preventing hurting someone on the same team
+        #this method is for preventing hurting someone on the same team
         """returns false if team numbers are the same, returns true otherwise: requires argument 'target' """
         if self.team == target.team:
             return False # false = they are not on the same team
@@ -103,7 +103,7 @@ class Item:
 
             
     def checkconsume(self):
-        #function used to check if an item still has uses
+        #method used to check if an item still has uses
         """checks if item can be consumed"""
         if self.uses > 0:
             return True
@@ -128,13 +128,13 @@ class Weapon(Item, Entity):
 
         
     def attack(self, user, target):
-        #this function uses functions from two different clases :skull:
+        #this method uses methods from two different classes :skull:
         """attacks with the weapon: requires arguments 'user' and 'target' """
         print(f"{user.name} attacks {target.name} with {self.name}!")
         if self.checkconsume() & target.state & user.checkteam(target) == True:
-        #self.checkconsume() - function in the Item class. returns bool checking if an item can be consumed
-        #target.state() - function in the Entity class. returns bool. False = dead, True = alive
-        #user.checkteam(target) - function in the Entity class. returns true if target is not on the same team
+        #self.checkconsume() - method in the Item class. returns bool checking if an item can be consumed
+        #target.state() - method in the Entity class. returns bool. False = dead, True = alive
+        #user.checkteam(target) - method in the Entity class. returns true if target is not on the same team
         # if all([self.checkconsume(),target.state(),user.checkteam(target)]) == True:
             try:
                 self.consume()
@@ -143,8 +143,8 @@ class Weapon(Item, Entity):
                     print(f'{target.name} is dead')
                 else:
                     print(f'{target.name} takes {self.damage} damage.')
-                #self.consume() - function in the Item class. 
-                #target.hurt(argument) - function in the Entity class. subtracts argument from hitpoints
+                #self.consume() - method in the Item class. 
+                #target.hurt(argument) - method in the Entity class. subtracts argument from hitpoints
                 #self.damage() - parameter in the Weapon class - damage of the weapon
                 # in this code block:
                 # before attacking, check if item can be consumed, target is alive, and target is on another team
@@ -193,6 +193,7 @@ class Menu:
                 index += 1
             index = 0
                 
+
         # print(player)    
         if player != 0:
             return player
@@ -202,13 +203,15 @@ class Menu:
             #     Menu.playerselect(inputdict)
             # return player
 
+
     def playercreate(inputdict):
         """user creates a character"""
-        #open json file function, writable
+        #open json file method, writable
         #temp = playerselect()
         global playercharacter
         playercharacter = Menu.playerselect(inputdict)
         #write temp to player data json
+
 
     def gamestart():
         """initiates game"""
@@ -238,7 +241,7 @@ class Menu:
         elif choice == 2:
             print("loading savefiles...")
             #try:
-            # load json function
+            # load json method
             #except:
             # "those files do not exist"
         else:
@@ -246,10 +249,11 @@ class Menu:
             if Menu.retryinput() == True:
                 Menu.gamenewgame()
 
+
     def retryinput():
         """prompts the user to retry an input"""
         #actually implementing this method can destroy some things
-        #this destroyed playerselect when i tried it
+        #this destroyed playerselect when i tried to integrate it
         print("invalid input,\n retry input?\n 1: yes\n 2: no\n")
         choice = int(input())
         if choice == 1:
@@ -261,5 +265,9 @@ class Menu:
         else:
             print("guess not")
             return 0
+        
+
+    def starteritemselect(entity, item):
+        print("select an item to start your journey\n")
 
         
