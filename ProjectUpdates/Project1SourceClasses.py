@@ -198,6 +198,9 @@ class Menu:
             return player
         else:
             print("class does not exist")
+            # if Menu.retryinput() == True:
+            #     Menu.playerselect(inputdict)
+            # return player
 
     def playercreate(inputdict):
         """user creates a character"""
@@ -225,6 +228,38 @@ class Menu:
             print("guess not")
 
 
-            
+    def gamenewgame():
+        """tells the player to choose between creating a new game or loading a save"""
+        print("would you like to: \n 1: start a new game \n 2: load a save \n")
+        choice = int(input())
+        if choice == 1:
+            print("creating a new character...")
+            Menu.playercreate()
+        elif choice == 2:
+            print("loading savefiles...")
+            #try:
+            # load json function
+            #except:
+            # "those files do not exist"
+        else:
+            print("invalid input")
+            if Menu.retryinput() == True:
+                Menu.gamenewgame()
+
+    def retryinput():
+        """prompts the user to retry an input"""
+        #actually implementing this method can destroy some things
+        #this destroyed playerselect when i tried it
+        print("invalid input,\n retry input?\n 1: yes\n 2: no\n")
+        choice = int(input())
+        if choice == 1:
+            print("sending you back...")
+            return True
+        elif choice == 2:
+            print("exiting...")
+            return 0
+        else:
+            print("guess not")
+            return 0
 
         
