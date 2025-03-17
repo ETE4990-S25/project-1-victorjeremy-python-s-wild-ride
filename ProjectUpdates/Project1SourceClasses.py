@@ -160,6 +160,36 @@ class Weapon(Item, Entity):
 class Menu:
     def __init__(self):
         """empty"""
+        global characterdict
+        #temporary solution became a permanent one (for one line ._.)
+        characterdict = {
+            "magic": [
+                {"wizard": ['wizard', 'tbd', 5, 1, 120]},
+                {"sorcerer": ['sorcerer', 'tbd', 5, 1, 120]},
+                {"necromancer": ['necromancer', 'tbd', 5, 1, 120]}
+            ],
+            "brawler": [
+                {"barbarian": ['barbarian', 'tbd', 5, 1, 120]},
+                {"giant": ['giant', 'tbd', 5, 1, 120]},
+                {"gladiator": ['gladiator', 'tbd', 5, 1, 120]}
+            ],
+            "swordsman": [
+                {"samurai": ['samurai', 'tbd', 5, 1, 120]},
+                {"crusader": ['crusader', 'tbd', 5, 1, 120]},
+                {"buster": ['buster', 'tbd', 5, 1, 120]}
+            ],
+            "stealth": [
+                {"druid": ['druid', 'tbd', 5, 1, 120]},
+                {"ninja": ['ninja', 'tbd', 5, 1, 120]},
+                {"rogue": ['rogue', 'tbd', 5, 1, 120]}
+            ],
+            "healer": [
+                {"cleric": ['cleric', 'tbd', 5, 1, 120]},
+                {"sage": ['sage', 'tbd', 5, 1, 120]},
+                {"shaman": ['shaman', 'tbd', 5, 1, 120]}
+            ]
+            }
+
     def playerselect(inputdict):
         """player selects class to play as"""
         temp = input("select a class\n")
@@ -254,7 +284,7 @@ class Menu:
         else:
             print("invalid input")
             if Menu.retryinput() == True:
-                Menu.gamenewgame()
+                return Menu.gamenewgame()
             
     def retryinput():
         """prompts the user to retry an input"""
