@@ -1,6 +1,12 @@
 repository for Victor Flores and Jeremy Esperanza
 ETE 4990
 
+The main chunk of the code framework is done in `Project1SourceClasses.py` while the
+prototyping of game flow is done in `project1_prototyping.ipynb` 
+
+basic unit testing is within file as well
+
+JSON files were made for persistence and charcter/enemy creation
 
 goals
     - Player type selection
