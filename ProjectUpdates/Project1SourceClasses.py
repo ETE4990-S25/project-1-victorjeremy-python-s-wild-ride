@@ -160,17 +160,47 @@ class Weapon(Item, Entity):
 class Menu:
     def __init__(self):
         """empty"""
-    def playerSelect(inputdict):
+        global characterdict
+        #temporary solution became a permanent one (for one line ._.)
+        characterdict = {
+            "magic": [
+                {"wizard": ['wizard', 'tbd', 5, 1, 120]},
+                {"sorcerer": ['sorcerer', 'tbd', 5, 1, 120]},
+                {"necromancer": ['necromancer', 'tbd', 5, 1, 120]}
+            ],
+            "brawler": [
+                {"barbarian": ['barbarian', 'tbd', 5, 1, 120]},
+                {"giant": ['giant', 'tbd', 5, 1, 120]},
+                {"gladiator": ['gladiator', 'tbd', 5, 1, 120]}
+            ],
+            "swordsman": [
+                {"samurai": ['samurai', 'tbd', 5, 1, 120]},
+                {"crusader": ['crusader', 'tbd', 5, 1, 120]},
+                {"buster": ['buster', 'tbd', 5, 1, 120]}
+            ],
+            "stealth": [
+                {"druid": ['druid', 'tbd', 5, 1, 120]},
+                {"ninja": ['ninja', 'tbd', 5, 1, 120]},
+                {"rogue": ['rogue', 'tbd', 5, 1, 120]}
+            ],
+            "healer": [
+                {"cleric": ['cleric', 'tbd', 5, 1, 120]},
+                {"sage": ['sage', 'tbd', 5, 1, 120]},
+                {"shaman": ['shaman', 'tbd', 5, 1, 120]}
+            ]
+            }
+
+    def playerselect(inputdict):
         """player selects class to play as"""
-        choice = input("select a class\n")
+        temp = input("select a class\n")
+        choice = temp.lower()
         player = 0
         index = 0
-        #to display the options to the player
+        #this loop is designed to iterate through the heirarchy: dict/list/dict
         if choice == "help":
             print("here is what you can choose from\n")
-            #this loop only applies to dictionaries with the order: dict/list/dict
             for i in inputdict:
-                print(i)
+                #print(i)
                 for j in inputdict[i]:
                     # print(j)
                     # print(index)
@@ -178,40 +208,38 @@ class Menu:
                         print(inputdict[i][index][k][0])
                     index += 1
                 index = 0
-            Menu.playerselect(inputdict)
-            return 0
-        #this loop only applies to dictionaries with the order: dict/list/dict
+            return Menu.playerselect(inputdict)
         for i in inputdict:
             # print(i)
             for j in inputdict[i]:
                 # print(j)
                 # print(index)
                 for k in inputdict[i][index]:
-                    # print(inputdict[i][index][k][0])
-                    if choice == str(inputdict[i][index][k][0]):
+                    # print(characterdict[i][index][k][0])
+                    if choice == inputdict[i][index][k][0]:
                         player = choice
                 index += 1
             index = 0
-                
-
+            
         # print(player)    
         if player != 0:
             return player
         else:
             print("class does not exist")
+            return Menu.playerselect(inputdict)
+            # return 0
             # if Menu.retryinput() == True:
             #     Menu.playerselect(inputdict)
             # return player
-
+            
 
     def playercreate(inputdict):
         """user creates a character"""
-        #open json file method, writable
+        #open json file function, writable
         #temp = playerselect()
         global playercharacter
         playercharacter = Menu.playerselect(inputdict)
         #write temp to player data json
-
 
     def gamestart():
         """initiates game"""
@@ -222,38 +250,45 @@ class Menu:
         enemylist = []
         global playercharacter
         playercharacter = 0
+        #import jsons and assign accordingly
+        #global characterdict
+        #characterdict = loadjson(characters)
         
         print("welcome\n would you like to mindlessly press 1")
         choice = int(input())
         if choice == 1:
             print("let us begin")
+            Menu.gamenewgame()
         else:
             print("guess not")
-
-
+        
     def gamenewgame():
         """tells the player to choose between creating a new game or loading a save"""
         print("would you like to: \n 1: start a new game \n 2: load a save \n")
         choice = int(input())
         if choice == 1:
             print("creating a new character...")
-            Menu.playercreate()
+            #creates a new character and starter item
+            global playercharacter
+            playercharacter = Menu.playercreate(characterdict)
+            starteritem = Menu.starteritemselect()
+            playercharacter.additem(starteritem.name, starteritem)
+
+
         elif choice == 2:
-            print("loading savefiles...")
+            print("loading savefiles...(this doesnt work yet)")
             #try:
-            # load json method
+            # load json function
             #except:
             # "those files do not exist"
         else:
             print("invalid input")
             if Menu.retryinput() == True:
-                Menu.gamenewgame()
-
-
+                return Menu.gamenewgame()
+            
     def retryinput():
         """prompts the user to retry an input"""
-        #actually implementing this method can destroy some things
-        #this destroyed playerselect when i tried to integrate it
+        #this method can destroy some things
         print("invalid input,\n retry input?\n 1: yes\n 2: no\n")
         choice = int(input())
         if choice == 1:
@@ -265,9 +300,8 @@ class Menu:
         else:
             print("guess not")
             return 0
-        
-
-    def starteritemselect(entity, item):
+            
+    def starteritemselect():
         starterweapons = [Weapon("club", "blunt stick, quite durable", 25, 15),
                         Weapon("strange robot bird pile", "each one says it delivers a warm hug", 7, 9999),
                         Weapon("brittle sword", "made with too high of a hardness, seems brittle", 12, 45)
@@ -291,5 +325,13 @@ class Menu:
         else:
             print("invalid choice, try again")
             return Menu.starteritemselect()
+        
+
+            
+        
+    
+        
+        
+            
 
         
