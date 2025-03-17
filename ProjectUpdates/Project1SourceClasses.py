@@ -268,6 +268,28 @@ class Menu:
         
 
     def starteritemselect(entity, item):
+        starterweapons = [Weapon("club", "blunt stick, quite durable", 25, 15),
+                        Weapon("strange robot bird pile", "each one says it delivers a warm hug", 7, 9999),
+                        Weapon("brittle sword", "made with too high of a hardness, seems brittle", 12, 45)
+                        ]
+        #temporary list to store item names
+        tempnums = []
         print("select an item to start your journey\n")
+        index = 0
+        choice = 0
+        for i in starterweapons:
+            print(f"{index + 1}. {starterweapons[index].name}")
+            tempnums.append(index + 1)
+            index += 1
+            #print(index)
+        try:
+            choice = int(input())
+        except:
+            print("input was not a number")
+        if choice in tempnums:
+            return starterweapons[choice-1]
+        else:
+            print("invalid choice, try again")
+            return Menu.starteritemselect()
 
         
