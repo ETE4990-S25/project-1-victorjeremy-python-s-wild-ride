@@ -157,11 +157,13 @@ class Weapon(Item, Entity):
 #end of Weapon subclass
 
 #start of menu class
-class Menu:
-    def __init__(self):
-        """empty"""
+class Menu(Entity):
+    #inherits from the class entity
+    def __init__(self, name, description, inventory_limit, team, hitpoints):
+        super().__init__(name, description, inventory_limit, team, hitpoints)
+    def initialize():
         global characterdict
-        #temporary solution became a permanent one (for one line ._.)
+        #establishing a global for one method in this class :skull:
         characterdict = {
             "magic": [
                 {"wizard": ['wizard', 'tbd', 5, 1, 120]},
@@ -189,7 +191,7 @@ class Menu:
                 {"shaman": ['shaman', 'tbd', 5, 1, 120]}
             ]
             }
-
+        
     def playerselect(inputdict):
         """player selects class to play as"""
         temp = input("select a class\n")
@@ -217,11 +219,13 @@ class Menu:
                 for k in inputdict[i][index]:
                     # print(characterdict[i][index][k][0])
                     if choice == inputdict[i][index][k][0]:
+                        # for p in range(4):
+                        #     print(inputdict[i][index][k][p])
                         player = Entity(inputdict[i][index][k][0],
                                          inputdict[i][index][k][1],
                                           inputdict[i][index][k][2],
                                            inputdict[i][index][k][3],
-                                            inputdict[i][index][k][4] )
+                                            inputdict[i][index][k][4])
                 index += 1
             index = 0
             
@@ -243,12 +247,14 @@ class Menu:
         #temp = playerselect()
         global playercharacter
         playercharacter = Menu.playerselect(inputdict)
+        return playercharacter
         #write temp to player data json
 
     def gamestart():
         """initiates game"""
         #local choice
         choice = 0
+        Menu.initialize()
         #resets globals
         global enemylist
         enemylist = []
@@ -267,6 +273,7 @@ class Menu:
             print("guess not")
         
     def gamenewgame():
+        global characterdict
         """tells the player to choose between creating a new game or loading a save"""
         print("would you like to: \n 1: start a new game \n 2: load a save \n")
         choice = int(input())
@@ -275,8 +282,10 @@ class Menu:
             #creates a new character and starter item
             global playercharacter
             playercharacter = Menu.playercreate(characterdict)
+            #print(playercharacter)
             starteritem = Menu.starteritemselect()
             playercharacter.additem(starteritem.name, starteritem)
+            MainGame.playcycle()
 
 
         elif choice == 2:
@@ -329,38 +338,100 @@ class Menu:
         else:
             print("invalid choice, try again")
             return Menu.starteritemselect()
-        
+
 class MainGame:
-    def __init__(self, player):
-        global playercharacter
-        self.player = playercharacter
-        self.score = 0
+    def __init__():
+        """empty"""
+        
+    def initialize():
+        global score
+        score = 0
+        global pullenemydict 
+        pullenemydict = {"minions": [{"goblin": ["goblin", "tbd", 1, 2, 65]}, 
+                                    {"skeleton": ["skeleton", "tbd", 1, 2, 55]}, 
+                                    {"locust": ["locust", "tbd", 1, 2, 35]}]}
 
     def playcycle():
+        MainGame.initialize()
+        global playercharacter
         while playercharacter.checklivingstate() == True:
-            print("game in action")
-            break
-        
+            MainGame.rest()
+            MainGame.combat()
+        Maingame.endgame()
     
     def rest():
+        global playercharacter
         """rest phase"""
-
+        print("we are now in rest phase!\n")
+        choice = int(input("what would you like to do?\n1. Check inventory\n 2. save\n 3. leave\n"))
+        if choice == 1:
+            MainGame.inspect(playercharacter)
+            return MainGame.rest()
+        elif choice == 2:
+            MainGame.savegame()
+            return MainGame.rest()
+        elif choice == 3:
+            return 0
+        else:
+            return MainGame.rest()
+            
     
     def combat():
+        global playercharacter
+        
         """combat phase"""
+        while playercharacter.checklivingstate() == True:
+            enemylist = []
+            enemylist.append(Entity(pullenemydict["minions"][2]["locust"][0],
+                                    pullenemydict["minions"][2]["locust"][1],
+                                    pullenemydict["minions"][2]["locust"][2],
+                                    pullenemydict["minions"][2]["locust"][3],
+                                    pullenemydict["minions"][2]["locust"][4]))
+            enemylist[0].additem({"loiter": Weapon('loiter', 'delivers warm hugs', 4, 9999)})
+                             
+            print("we are now in combat phase!\n")
+            choice = int(input("enemy ahead!\n what would you like to do?\n1. attack\n\n"))
+            if choice == 1:
+                tempnums = []
+                index = 0
+                choice = int(input("choose an enemy to attack"))
+                for i in enemylist:
+                    print(f"{index + 1}. {enemylist[index].name}")
+                    tempnums.append(index + 1)
+                    index += 1
+                if choice in tempnums:
+                    for i in playercharacter.inventory:
+                        playercharacter.inventory[i].attack(playercharacter, enemylist[index])
+                for i in enemylist:
+                    enemylist[i].inventory['loiter'].attack(enemylist[i], playercharacter)
+        
+        
+            
+            
+            
+        
 
-    def rest_actions():
-        """displays the actions the player can take during rest"""
+    # def rest_actions():
+    #     """displays the actions the player can take during rest"""
 
-    def combat_actions():
-        """displays the actions player can take during combat"""
+    # def combat_actions():
+    #     """displays the actions player can take during combat"""
 
     def inspect(entity):
         """tbd"""
+        print(f"you have {entity.hitpoints} hit points remaining")
+        for i in entity.inventory:
+            print(entity.inventory[i].name)
+            print(entity.inventory[i].desc)
+            print(f"{entity.inventory[i].uses} uses until broken")
+            print(f"{entity.inventory[i].damage} damage points")
+        
     
-    def endgame(self):
+    def endgame():
+        global score
         print("game over!\n")
-        print(f"you scored {self.score} points")
+        print(f"you scored {score} points\n")
+        print("Thanks for Playing!!! \n \n ======Credits======= \n \n Head Game Developer: Jeremy Esperanza \n Assistant Developer: Victor Flores")
 
     def savegame():
         """Saving Game Progress"""
@@ -368,8 +439,9 @@ class MainGame:
 
         with open('last_save.json','w') as f:
             json.dumps(Entity,f)
-            print("your game is now saved.Thanks for Playing!!! \n \n ======Credits======= \n \n Head Game Developer: Jeremy Esperanza \n Assistant Developer: Victor Flores")
-            
+            print("your game is now saved.")
+        
+
             
         
     
