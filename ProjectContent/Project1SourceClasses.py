@@ -358,7 +358,7 @@ class MainGame:
     def inspect(entity):
         """tbd"""
     
-    def endgame():
+    def endgame(self):
         print("game over!\n")
         print(f"you scored {self.score} points")
 
