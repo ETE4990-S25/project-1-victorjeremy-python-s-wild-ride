@@ -344,6 +344,7 @@ class MainGame:
     
     def rest():
         """rest phase"""
+
     
     def combat():
         """combat phase"""
@@ -360,6 +361,15 @@ class MainGame:
     def endgame(self):
         print("game over!\n")
         print(f"you scored {self.score} points")
+
+    def savegame():
+        """Saving Game Progress"""
+        import json
+
+        with open('last_save.json','w') as f:
+            json.dumps(Entity,f)
+            print("your game is now saved.Thanks for Playing!!! \n \n ======Credits======= \n \n Head Game Developer: Jeremy Esperanza \n Assistant Developer: Victor Flores")
+            
             
         
     
