@@ -217,7 +217,11 @@ class Menu:
                 for k in inputdict[i][index]:
                     # print(characterdict[i][index][k][0])
                     if choice == inputdict[i][index][k][0]:
-                        player = choice
+                        player = Entity(inputdict[i][index][k][0],
+                                         inputdict[i][index][k][1],
+                                          inputdict[i][index][k][2],
+                                           inputdict[i][index][k][3],
+                                            inputdict[i][index][k][4] )
                 index += 1
             index = 0
             
@@ -326,7 +330,36 @@ class Menu:
             print("invalid choice, try again")
             return Menu.starteritemselect()
         
+class MainGame:
+    def __init__(self, player):
+        global playercharacter
+        self.player = playercharacter
+        self.score = 0
 
+    def playcycle():
+        while playercharacter.checklivingstate() == True:
+            print("game in action")
+            break
+        
+    
+    def rest():
+        """rest phase"""
+    
+    def combat():
+        """combat phase"""
+
+    def rest_actions():
+        """displays the actions the player can take during rest"""
+
+    def combat_actions():
+        """displays the actions player can take during combat"""
+
+    def inspect(entity):
+        """tbd"""
+    
+    def endgame():
+        print("game over!\n")
+        print(f"you scored {self.score} points")
             
         
     
