@@ -1,14 +1,16 @@
 repository for Victor Flores and Jeremy Esperanza
 ETE 4990
 
+Our game can be played on `Pythons_Wild_Ride[USE ME].py`
+
 The main chunk of the code framework is done in `Project1SourceClasses.py` while the
 prototyping of game flow is done in `project1_prototyping.ipynb` 
 
-basic unit testing is within file as well
+basic unit testing is within file as well (for Lab 6)
 
 JSON files were made for persistence and charcter/enemy creation
 
-goals
+Our goals
     - Player type selection
         -
     - Inventory Management
