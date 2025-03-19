@@ -387,7 +387,7 @@ class MainGame:
                                     pullenemydict["minions"][2]["locust"][2],
                                     pullenemydict["minions"][2]["locust"][3],
                                     pullenemydict["minions"][2]["locust"][4]))
-            enemylist[0].additem("loiter", Weapon('loiter', 'delivers warm hugs', 4, 9999))
+            enemylist[0].additem({"loiter": Weapon('loiter', 'delivers warm hugs', 4, 9999)})
                              
             print("we are now in combat phase!\n")
             choice = int(input("enemy ahead!\n what would you like to do?\n1. attack\n\n"))
@@ -401,10 +401,9 @@ class MainGame:
                     index += 1
                 if choice in tempnums:
                     for i in playercharacter.inventory:
-                        playercharacter.inventory[i].attack(playercharacter, enemylist[choice - 1])
-                index = 0
+                        playercharacter.inventory[i].attack(playercharacter, enemylist[index])
                 for i in enemylist:
-                    enemylist[index].inventory['loiter'].attack(enemylist[index], playercharacter)
+                    enemylist[i].inventory['loiter'].attack(enemylist[i], playercharacter)
         
         
             
