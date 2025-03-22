@@ -447,7 +447,7 @@ class MainGame:
         
     
         
-        
+Menu.gamestart()
             
 
         
